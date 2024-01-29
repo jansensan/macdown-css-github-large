@@ -36,11 +36,11 @@ a.anchor {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
-  padding: 0;
-  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   cursor: text;
+  font-weight: bold;
+  margin: 20px 0 10px;
+  padding: 0;
   position: relative;
 }
 
@@ -418,8 +418,9 @@ kbd {
 
 @media print {
   body {
-    margin: 1in;
     font-size: 12pt;
+    margin: 0.25in 0.75in !important;
+    padding-top: 0 !important;
   }
   table, pre {
     page-break-inside: avoid;
@@ -427,6 +428,18 @@ kbd {
   pre {
     word-wrap: break-word;
   }
+  /* FIXME: unable to prevent page break after heading */
+  h1, h2, h3, h4, h5, h6 {
+    float: none !important;
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+  }
+  h1+*, h2+*, h3+*, h4+*, h5+*, h6+* {
+    float: none;
+    break-before: avoid-page !important;
+    page-break-before: avoid !important;
+  }
+  /* FIXME END */
   img {
     max-width: 66%;
   }
